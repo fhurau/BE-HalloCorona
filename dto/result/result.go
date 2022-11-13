@@ -1,7 +1,7 @@
 package dto
 
 type SuccessResult struct {
-	Code string      `json:"status"`
+	Code int         `json:"status"`
 	Data interface{} `json:"data"`
 }
 

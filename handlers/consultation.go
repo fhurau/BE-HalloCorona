@@ -69,7 +69,7 @@ func (h *handlerConsultation) CreateConsultation(w http.ResponseWriter, r *http.
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseConsultation(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseConsultation(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -103,7 +103,7 @@ func (h *handlerConsultation) FindConsultation(w http.ResponseWriter, r *http.Re
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: users}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: users}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -121,7 +121,7 @@ func (h *handlerConsultation) GetConsultation(w http.ResponseWriter, r *http.Req
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseConsultation(consultation)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseConsultation(consultation)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -193,7 +193,7 @@ func (h *handlerConsultation) UpdateConsultation(w http.ResponseWriter, r *http.
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseConsultation(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseConsultation(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -219,6 +219,6 @@ func (h *handlerConsultation) DeleteConsultation(w http.ResponseWriter, r *http.
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseConsultation(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseConsultation(data)}
 	json.NewEncoder(w).Encode(response)
 }

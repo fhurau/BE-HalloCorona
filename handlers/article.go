@@ -40,7 +40,7 @@ func (h *handlerArticle) FindArticles(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: articles}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: articles}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -61,7 +61,7 @@ func (h *handlerArticle) GetArticle(w http.ResponseWriter, r *http.Request) {
 	article.Image = path_file + article.Image
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseArticle(article)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseArticle(article)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -109,7 +109,7 @@ func (h *handlerArticle) CreateArticle(w http.ResponseWriter, r *http.Request) {
 	article, _ = h.ArticleRepository.GetArticle(article.ID)
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "success", Data: article}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: article}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -163,7 +163,7 @@ func (h *handlerArticle) UpdateArticle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseArticle(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseArticle(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -189,6 +189,6 @@ func (h *handlerArticle) DeleteArticle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponseArticle(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseArticle(data)}
 	json.NewEncoder(w).Encode(response)
 }

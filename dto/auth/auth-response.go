@@ -10,6 +10,7 @@ type LoginResponse struct {
 	Gender   string `gorm:"type: varchar(255)" json:"gender"`
 	Phone    string `gorm:"type: varchar(255)" json:"phone"`
 	Address  string `gorm:"type: varchar(255)" json:"address"`
+	Image    string `gorm:"type: varchar(255)" json:"image"`
 	Token    string `gorm:"type: varchar(255)" json:"token"`
 }
 
@@ -34,4 +35,5 @@ type CheckAuthResponse struct {
 	Gender   string `gorm:"type: varchar(255)" json:"gender"`
 	Phone    string `gorm:"type: varchar(255)" json:"phone"`
 	Address  string `gorm:"type: varchar(255)" json:"address"`
+	Image    string `gorm:"type: varchar(255)" json:"image"`
 }

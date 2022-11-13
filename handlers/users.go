@@ -56,7 +56,7 @@ func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponse(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -71,7 +71,7 @@ func (h *handler) FindUsers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: users}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: users}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -89,7 +89,7 @@ func (h *handler) GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponse(user)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(user)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -106,14 +106,16 @@ func convertResponse(u models.User) usersdto.UserResponse {
 func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	// dataContex := r.Context().Value("dataFile")
-	// filename := dataContex.(string)
+	dataContex := r.Context().Value("dataFile")
+	filename := dataContex.(string)
 
 	request := usersdto.UpdateUserRequest{
-		Name:  r.FormValue("name"),
-		Email: r.FormValue("email"),
-		Phone: r.FormValue("phone"),
-		// Image: filename,
+		Name:    r.FormValue("name"),
+		Email:   r.FormValue("email"),
+		Phone:   r.FormValue("phone"),
+		Image:   filename,
+		Address: r.FormValue("address"),
+		Gender:  r.FormValue("gender"),
 	}
 
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
@@ -134,10 +136,15 @@ func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	if request.Phone != "" {
 		user.Phone = request.Phone
 	}
-
-	// if request.Image != "" {
-	// 	user.Image = request.Image
-	// }
+	if request.Gender != "" {
+		user.Gender = request.Gender
+	}
+	if request.Address != "" {
+		user.Address = request.Address
+	}
+	if request.Image != "" {
+		user.Image = request.Image
+	}
 
 	data, err := h.UserRepository.UpdateUser(user, id)
 	if err != nil {
@@ -148,7 +155,7 @@ func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponse(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -174,6 +181,6 @@ func (h *handler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "Success", Data: convertResponse(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponse(data)}
 	json.NewEncoder(w).Encode(response)
 }

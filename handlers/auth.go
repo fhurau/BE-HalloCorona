@@ -58,9 +58,9 @@ func (h *handlerAuth) Register(w http.ResponseWriter, r *http.Request) {
 		Email:    request.Email,
 		Password: password,
 		ListAs:   request.ListAs,
-		Gender:   request.Gender,
-		Phone:    request.Phone,
-		Address:  request.Address,
+		// Gender:   request.Gender,
+		// Phone:    request.Phone,
+		// Address:  request.Address,
 	}
 
 	regUser, err := h.AuthRepository.Login(user.Username)
@@ -98,7 +98,7 @@ func (h *handlerAuth) Register(w http.ResponseWriter, r *http.Request) {
 		Address:  data.Address,
 	}
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: "success", Data: registerResponse}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: registerResponse}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -146,6 +146,7 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	loginResponse := authdto.LoginResponse{
+		ID:       user.ID,
 		Name:     user.Name,
 		Username: user.Username,
 		Email:    user.Email,
@@ -153,11 +154,12 @@ func (h *handlerAuth) Login(w http.ResponseWriter, r *http.Request) {
 		Gender:   user.Gender,
 		Phone:    user.Phone,
 		Address:  user.Address,
+		Image:    user.Image,
 		Token:    token,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	response := dto.SuccessResult{Code: "success", Data: loginResponse}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: loginResponse}
 	json.NewEncoder(w).Encode(response)
 
 }
@@ -177,6 +179,7 @@ func (h *handlerAuth) CheckAuth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	CheckAuthResponse := authdto.CheckAuthResponse{
+		ID:       user.ID,
 		Name:     user.Name,
 		Username: user.Username,
 		Email:    user.Email,
@@ -184,9 +187,10 @@ func (h *handlerAuth) CheckAuth(w http.ResponseWriter, r *http.Request) {
 		Gender:   user.Gender,
 		Phone:    user.Phone,
 		Address:  user.Address,
+		Image:    user.Image,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	response := dto.SuccessResult{Code: "success", Data: CheckAuthResponse}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: CheckAuthResponse}
 	json.NewEncoder(w).Encode(response)
 }

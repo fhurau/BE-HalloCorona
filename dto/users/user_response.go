@@ -10,4 +10,5 @@ type UserResponse struct {
 	Gender   string `gorm:"type: varchar(100)" json:"gender"`
 	Phone    string `gorm:"type: varchar(100)" json:"phone"`
 	Address  string `gorm:"type: text" json:"address"`
+	Image    string `gorm:"type: varchar(255)" json:"image"`
 }
